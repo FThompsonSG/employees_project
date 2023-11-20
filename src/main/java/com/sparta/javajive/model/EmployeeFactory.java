@@ -1,4 +1,4 @@
-package com.sparta.javajive;
+package com.sparta.javajive.model;
 
 import java.io.*;
 import java.util.*;

@@ -1,0 +1,5 @@
+This package should be where the main logic should be placed.
+
+This will include writing methods to query the objects and collections.
+
+This information could be displayed back to the user in the view package, depending on the method.

@@ -1,0 +1,3 @@
+This package should only contain code to allow the user to interact with our system.
+
+This could be methods asking for input and then calling methods written in the controller package
