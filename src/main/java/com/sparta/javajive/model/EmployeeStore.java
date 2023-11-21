@@ -13,10 +13,7 @@ public class EmployeeStore {
 
     public static Employee createEmployee(String empInfo) {
         String[] splitEmpInfo = empInfo.split(",");
-
-        Employee thisGuy = new Employee(Integer.parseInt(splitEmpInfo[0]),splitEmpInfo[1],splitEmpInfo[2], splitEmpInfo[3].charAt(0),splitEmpInfo[4],splitEmpInfo[5],splitEmpInfo[6],splitEmpInfo[7],splitEmpInfo[8],Integer.parseInt(splitEmpInfo[9]));
-
-        return thisGuy;
+        return new Employee(Integer.parseInt(splitEmpInfo[0]),splitEmpInfo[1],splitEmpInfo[2], splitEmpInfo[3].charAt(0),splitEmpInfo[4],splitEmpInfo[5],splitEmpInfo[6],splitEmpInfo[7],splitEmpInfo[8],Integer.parseInt(splitEmpInfo[9]));
     }
 
     public static void setEmployeeArray(Employee employee){
@@ -25,10 +22,9 @@ public class EmployeeStore {
 
 
     public static void initializeEmployeeStore(int howMany) {
-
         try {
-            String[] test = EmployeeFactory.getEmployees(howMany);
-            for (String employeeString: test) {
+            String[] employeeStringArray = EmployeeFactory.getEmployees(howMany);
+            for (String employeeString: employeeStringArray) {
                 setEmployeeArray(createEmployee(employeeString));
             }
         } catch (Exception e) {
