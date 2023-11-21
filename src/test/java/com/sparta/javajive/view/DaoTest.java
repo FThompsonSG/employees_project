@@ -28,7 +28,7 @@ class DaoTest {
 
     @Test
     void getByIdTest() {
-        Assertions.assertEquals(employees[0], daoImpl.getById("11111"));
+        Assertions.assertEquals(employees[0], daoImpl.getById(employees,"11111"));
     }
 
     @Test

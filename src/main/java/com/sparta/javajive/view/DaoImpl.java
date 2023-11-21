@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class DaoImpl implements Dao {
 
     @Override
-    public Employee getById(String id) {
+    public Employee getById(ArrayList<Employee> employees, String id) {
         return null;
     }
 
