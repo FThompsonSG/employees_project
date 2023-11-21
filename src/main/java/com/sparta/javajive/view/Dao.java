@@ -1,13 +1,15 @@
 package com.sparta.javajive.view;
 
+import java.util.ArrayList;
+
 public interface Dao {
 
-    void getById(String id);
+    Employee getById(String id);
 
-    void getByLastName(String lastName);
+    Employee getByLastName(String lastName);
 
-    void getByDateRange(String startDate, String endDate);
+    ArrayList<Employee> getByDateRange(String startDate, String endDate);
 
-    void getByAgeRange(String startAge, String endAge);
+    ArrayList<Employee> getByAgeRange(String startAge, String endAge);
 
 }
