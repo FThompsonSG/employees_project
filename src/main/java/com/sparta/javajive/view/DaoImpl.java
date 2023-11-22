@@ -3,6 +3,7 @@ package com.sparta.javajive.view;
 import com.sparta.javajive.model.Employee;
 import com.sparta.javajive.model.EmployeeStore;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,12 +36,24 @@ public class DaoImpl implements Dao {
     }
 
     @Override
-    public ArrayList<Employee> getByDateRange(String dateOfJoining, String endDate) {
-        return null;
+    public ArrayList<Employee> getByDateRange(String minRange, String maxRange) {
+        ArrayList<Employee> result = new ArrayList<>();
+        LocalDate startDate = LocalDate.parse(minRange);
+        LocalDate endDate = LocalDate.parse(maxRange);
+
+        for (Employee employee :EmployeeStore.getEmployeeStore()) {
+            LocalDate dateOfJoining = LocalDate.parse(employee.getDateOfJoining());
+            if(!dateOfJoining.isBefore(startDate) && !dateOfJoining.isAfter(endDate)){
+                result.add(employee);
+            }
+        }
+        return result;
     }
 
     @Override
-    public ArrayList<Employee> getByAgeRange(String dateOfBirth, String endAge) {
+    public ArrayList<Employee> getByAgeRange(String minAge, String maxAge) {
+        int minAge;
+
         return null;
     }
 
