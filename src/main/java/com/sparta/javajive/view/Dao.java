@@ -1,10 +1,12 @@
 package com.sparta.javajive.view;
 
+import com.sparta.javajive.model.Employee;
+
 import java.util.ArrayList;
 
 public interface Dao {
 
-    Employee getById(String id);
+    Employee getById(int id);
 
     Employee getByLastName(String lastName);
 
