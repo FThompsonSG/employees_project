@@ -40,7 +40,7 @@ public class EmployeeStore {
             for (String employeeString: employeeStringArray) {
                 setEmployeeArray(createEmployee(employeeString));
             }
-            FileHandler fileHandler = new FileHandler("src/main/resources/logFile.log");
+            FileHandler fileHandler = new FileHandler("src/main/resources/loggedEmployeeFile.log");
             fileHandler.setLevel(Level.ALL);
             fileHandler.setFormatter(new SimpleFormatter());
             logger.setUseParentHandlers(false);
