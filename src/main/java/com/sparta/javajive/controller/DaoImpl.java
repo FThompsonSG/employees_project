@@ -73,11 +73,12 @@ public class DaoImpl implements Dao {
     @Override
     public ArrayList<Employee> getByAgeRange(String minAge, String maxAge) {
         ArrayList<Employee> result = new ArrayList<>();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         Integer minimumAge = Integer.parseInt(minAge);
         Integer maximumAge = Integer.parseInt(maxAge);
 
         for (Employee employee : EmployeeStore.getEmployeeStore()) {
-            LocalDate dateOfBirth = LocalDate.parse(employee.getDateOfBirth());
+            LocalDate dateOfBirth = LocalDate.parse(employee.getDateOfBirth(), formatter);
             LocalDate currentDate = LocalDate.now();
             Period period = Period.between(dateOfBirth, currentDate);
             int yearsOld = period.getYears();
