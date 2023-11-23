@@ -44,4 +44,8 @@ public class EmployeeStore {
             System.out.println("IOException");
         }
     }
+
+    public static void addEmployee(Employee employee) {
+        employeeStore.add(employee);
+    }
 }
