@@ -28,12 +28,14 @@ class DaoImplTest {
     }
 
     @BeforeAll
-    static void setUp() {
+    static void setUpAll() {
         set();
     }
 
     @Test
     void getByIdTest() {
+        Employee employee = new Employee(777872, "Mr.", "Blaine", 'Q', "Cockrell", "M", "blaine.cockrell@gmail.com", "31/08/1973", "29/06/2016", 176446);
+        Assertions.assertEquals(employee, daoImpl.getById(777872));
 
     }
 
