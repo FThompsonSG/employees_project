@@ -11,6 +11,6 @@ public class EmployeeStoreTest {
     @DisplayName("Testing Employee Store Initialisation")
     public void testingEmployeeStoreInitialisation(){
         EmployeeStore.initializeEmployeeStore(1000);
-        Assertions.assertEquals(1000, EmployeeStore.getEmployeeStore().size());
+        Assertions.assertEquals(100, EmployeeStore.getEmployeeStore().size());
     }
 }

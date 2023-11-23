@@ -52,7 +52,8 @@ public class DaoImpl implements Dao {
 
     @Override
     public ArrayList<Employee> getByAgeRange(String minAge, String maxAge) {
-        int minAge;
+        Integer minimumAge = Integer.parseInt(minAge);
+        Integer maximumAge = Integer.parseInt(minAge);
 
         return null;
     }
