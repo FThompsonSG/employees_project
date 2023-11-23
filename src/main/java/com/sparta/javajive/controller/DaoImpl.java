@@ -5,6 +5,8 @@ import com.sparta.javajive.model.EmployeeStore;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,16 +53,21 @@ public class DaoImpl implements Dao {
     @Override
     public ArrayList<Employee> getByDateRange(String minRange, String maxRange) {
         ArrayList<Employee> result = new ArrayList<>();
-        LocalDate startDate = LocalDate.parse(minRange);
-        LocalDate endDate = LocalDate.parse(maxRange);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate startDate = LocalDate.parse(minRange, formatter);
+        LocalDate endDate = LocalDate.parse(maxRange, formatter);
 
-        for (Employee employee : EmployeeStore.getEmployeeStore()) {
-            LocalDate dateOfJoining = LocalDate.parse(employee.getDateOfJoining());
-            if (!dateOfJoining.isBefore(startDate) && !dateOfJoining.isAfter(endDate)) {
-                result.add(employee);
-            }
-        }
-        return result;
+
+            for (Employee employee : EmployeeStore.getEmployeeStore()) {
+                try {
+                    LocalDate dateOfJoining = LocalDate.parse(employee.getDateOfJoining(), formatter);
+                    if (!dateOfJoining.isBefore(startDate) && !dateOfJoining.isAfter(endDate)) {
+                        result.add(employee);
+                    }
+                } catch (DateTimeParseException e) {
+                    System.out.println("Error parsing date for: " + employee.getLastName());
+                }
+            } return result;
     }
 
     @Override
