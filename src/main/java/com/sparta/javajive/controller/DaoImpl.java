@@ -1,4 +1,4 @@
-package com.sparta.javajive.view;
+package com.sparta.javajive.controller;
 
 import com.sparta.javajive.model.Employee;
 import com.sparta.javajive.model.EmployeeStore;
@@ -19,21 +19,28 @@ public class DaoImpl implements Dao {
 
     @Override
     public Employee getById(int empId) {
-        for(Employee employee: EmployeeStore.getEmployeeStore()) {
-            if(employee.getEmpId().equals(empId)) {
-                return employee;
-            }
-        } return null;
-    }
-
-    @Override
-    public Employee getByLastName(String lastName) {
-        for(Employee employee:EmployeeStore.getEmployeeStore()) {
-            if(employee.getLastName().equals(lastName)){
+        for (Employee employee : EmployeeStore.getEmployeeStore()) {
+            if (employee.getEmpId().equals(empId)) {
                 return employee;
             }
         }
         return null;
+    }
+
+    @Override
+    public ArrayList<Employee> getByLastName(String lastName) {
+        ArrayList<Employee> result = new ArrayList<>();
+        for (Employee employee : EmployeeStore.getEmployeeStore()) {
+            System.out.println(employee.toString());
+            System.out.println(employee.getLastName());
+            if (employee.getLastName().equals(lastName)) {
+                result.add(employee);
+            }
+        }
+        if (result.size() == 0) {
+            System.err.println("No employees found matching criteria");
+        }
+        return result;
     }
 
     @Override
@@ -42,9 +49,9 @@ public class DaoImpl implements Dao {
         LocalDate startDate = LocalDate.parse(minRange);
         LocalDate endDate = LocalDate.parse(maxRange);
 
-        for (Employee employee :EmployeeStore.getEmployeeStore()) {
+        for (Employee employee : EmployeeStore.getEmployeeStore()) {
             LocalDate dateOfJoining = LocalDate.parse(employee.getDateOfJoining());
-            if(!dateOfJoining.isBefore(startDate) && !dateOfJoining.isAfter(endDate)){
+            if (!dateOfJoining.isBefore(startDate) && !dateOfJoining.isAfter(endDate)) {
                 result.add(employee);
             }
         }
@@ -56,17 +63,18 @@ public class DaoImpl implements Dao {
         ArrayList<Employee> result = new ArrayList<>();
         Integer minimumAge = Integer.parseInt(minAge);
         Integer maximumAge = Integer.parseInt(maxAge);
-        
+
         for (Employee employee : EmployeeStore.getEmployeeStore()) {
             LocalDate dateOfBirth = LocalDate.parse(employee.getDateOfBirth());
             LocalDate currentDate = LocalDate.now();
             Period period = Period.between(dateOfBirth, currentDate);
             int yearsOld = period.getYears();
             if (yearsOld >= minimumAge && yearsOld <= maximumAge) {
-            result.add(employee);
+                result.add(employee);
             }
 
-        }return result;
+        }
+        return result;
     }
 
 }

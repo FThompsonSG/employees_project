@@ -1,4 +1,4 @@
-package com.sparta.javajive.view;
+package com.sparta.javajive.controller;
 
 import com.sparta.javajive.model.Employee;
 
@@ -8,7 +8,7 @@ public interface Dao {
 
     Employee getById(int id);
 
-    Employee getByLastName(String lastName);
+    ArrayList<Employee> getByLastName(String lastName);
 
     ArrayList<Employee> getByDateRange(String startDate, String endDate);
 
