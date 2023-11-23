@@ -19,11 +19,16 @@ public class DaoImpl implements Dao {
 
     @Override
     public Employee getById(int empId) {
-        for (Employee employee : EmployeeStore.getEmployeeStore()) {
-            if (employee.getEmpId().equals(empId)) {
-                return employee;
+        try{
+            for (Employee employee : EmployeeStore.getEmployeeStore()) {
+                if (employee.getEmpId().equals(empId)) {
+                    return employee;
+                }
             }
+        } catch (RuntimeException e) {
+            System.out.println("Employee Not Found.");
         }
+        System.out.println("Employee Not Found.");
         return null;
     }
 
