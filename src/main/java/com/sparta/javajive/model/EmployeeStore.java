@@ -1,11 +1,11 @@
 package com.sparta.javajive.model;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.logging.*;
 
 public class EmployeeStore {
+    private static final Logger logger = Logger.getLogger(EmployeeStore.class.getName());//pulls information from the class itself
+
     private static List<Employee> employeeStore = new ArrayList<>();
     private static Map<String, Integer> corruptedEmployees = new HashMap<>();
 
@@ -40,9 +40,22 @@ public class EmployeeStore {
             for (String employeeString: employeeStringArray) {
                 setEmployeeArray(createEmployee(employeeString));
             }
+            FileHandler fileHandler = new FileHandler("src/main/resources/logFile.log");
+            fileHandler.setLevel(Level.ALL);
+            fileHandler.setFormatter(new SimpleFormatter());
+            logger.setUseParentHandlers(false);
+            logger.addHandler(fileHandler);
+
+            for (String item : employeeStringArray) {
+                logger.info(item);
+            }
         } catch (Exception e) {
             System.out.println("IOException");
         }
+    }
+
+    public static void main(String[] args) {
+        initializeEmployeeStore(10);
     }
 
     public static void addEmployee(Employee employee) {
