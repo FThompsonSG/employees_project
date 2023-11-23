@@ -1,7 +1,13 @@
 package com.sparta.javajive.model;
 
-import java.util.*;
+
 import java.util.logging.*;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 
 public class EmployeeStore {
     private static final Logger logger = Logger.getLogger(EmployeeStore.class.getName());//pulls information from the class itself
@@ -15,17 +21,19 @@ public class EmployeeStore {
         return employeeStore;
     }
 
-    public static Employee createEmployee(String empInfo) {
+    public static void createEmployee(String empInfo) {
         String[] splitEmpInfo = empInfo.split(",");
 
-        int numberOfCorruptedFields = corruptedEmployeeChecker.countCorruptedFields(splitEmpInfo);
+        Employee newEmployee = new Employee(Integer.parseInt(splitEmpInfo[0]),splitEmpInfo[1],splitEmpInfo[2], splitEmpInfo[3].charAt(0),splitEmpInfo[4],splitEmpInfo[5],splitEmpInfo[6],splitEmpInfo[7],splitEmpInfo[8],Integer.parseInt(splitEmpInfo[9]));
+
+        int numberOfCorruptedFields = corruptedEmployeeChecker.countCorruptedFields(newEmployee);
 
         if(numberOfCorruptedFields > 0) {
             String fullName = splitEmpInfo[2] + " " + splitEmpInfo[3] + " " + splitEmpInfo[4];
             corruptedEmployees.put(fullName, numberOfCorruptedFields);
+        } else {
+            setEmployeeArray(newEmployee);
         }
-
-        return new Employee(Integer.parseInt(splitEmpInfo[0]),splitEmpInfo[1],splitEmpInfo[2], splitEmpInfo[3].charAt(0),splitEmpInfo[4],splitEmpInfo[5],splitEmpInfo[6],splitEmpInfo[7],splitEmpInfo[8],Integer.parseInt(splitEmpInfo[9]));
     }
 
     public static void setEmployeeArray(Employee employee){
@@ -38,25 +46,22 @@ public class EmployeeStore {
             corruptedEmployees.clear();
             String[] employeeStringArray = EmployeeFactory.getEmployees(howMany);
             for (String employeeString: employeeStringArray) {
-                setEmployeeArray(createEmployee(employeeString));
+                createEmployee(employeeString);
             }
             FileHandler fileHandler = new FileHandler("src/main/resources/loggedEmployeeFile.log");
             fileHandler.setLevel(Level.ALL);
             fileHandler.setFormatter(new SimpleFormatter());
             logger.setUseParentHandlers(false);
             logger.addHandler(fileHandler);
-
             for (String item : employeeStringArray) {
                 logger.info(item);
             }
-        } catch (Exception e) {
-            System.out.println("IOException");
+        } catch (IOException e) {
+            System.out.println("An IOException has occurred: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
-    public static void main(String[] args) {
-        initializeEmployeeStore(10);
-    }
 
     public static void addEmployee(Employee employee) {
         employeeStore.add(employee);
