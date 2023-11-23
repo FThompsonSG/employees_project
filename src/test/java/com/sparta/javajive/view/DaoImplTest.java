@@ -47,6 +47,8 @@ class DaoImplTest {
 
     @Test
     void getByDateRangeTest() {
+        Employee employee = new Employee(777872, "Mr.", "Blaine", 'Q', "Cockrell", "M", "blaine.cockrell@gmail.com", "31/08/1973", "29/06/2016", 176446);
+
     }
 
     @Test
