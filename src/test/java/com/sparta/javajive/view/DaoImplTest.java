@@ -24,7 +24,7 @@ class DaoImplTest {
 //        employees.add(employee2);
 //        employees.add(employee3);
 //        employees.add(employee4);
-        EmployeeStore.initializeEmployeeStore(10);
+        EmployeeStore.initializeEmployeeStore(1000);
     }
 
     @BeforeAll
@@ -35,6 +35,7 @@ class DaoImplTest {
     @Test
     void getByIdTest() {
         Employee employee = new Employee(777872, "Mr.", "Blaine", 'Q', "Cockrell", "M", "blaine.cockrell@gmail.com", "31/08/1973", "29/06/2016", 176446);
+        EmployeeStore.addEmployee(employee);
         Assertions.assertEquals(employee, daoImpl.getById(777872));
 
     }
@@ -47,6 +48,10 @@ class DaoImplTest {
 
     @Test
     void getByDateRangeTest() {
+        Employee employee = new Employee(777872, "Mr.", "Blaine", 'Q', "Cockrell", "M", "blaine.cockrell@gmail.com", "31/08/1973", "29/06/2016", 176446);
+        EmployeeStore.addEmployee(employee);
+        employees.add(employee);
+        Assertions.assertEquals(employees, daoImpl.getByDateRange("29/06/2016", "30/06/2016"));
     }
 
     @Test
