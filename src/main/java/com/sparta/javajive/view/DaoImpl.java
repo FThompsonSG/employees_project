@@ -4,6 +4,7 @@ import com.sparta.javajive.model.Employee;
 import com.sparta.javajive.model.EmployeeStore;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,14 +58,15 @@ public class DaoImpl implements Dao {
         Integer maximumAge = Integer.parseInt(maxAge);
         
         for (Employee employee : EmployeeStore.getEmployeeStore()) {
-            if (minimumAge >= Integer.parseInt(minAge) && maximumAge <= Integer.parseInt(maxAge) ){
-                result.add(employee);
-            
+            LocalDate dateOfBirth = LocalDate.parse(employee.getDateOfBirth());
+            LocalDate currentDate = LocalDate.now();
+            Period period = Period.between(dateOfBirth, currentDate);
+            int yearsOld = period.getYears();
+            if (yearsOld >= minimumAge && yearsOld <= maximumAge) {
+            result.add(employee);
             }
-            
-        }
-        
-        return result;
+
+        }return result;
     }
 
 }
