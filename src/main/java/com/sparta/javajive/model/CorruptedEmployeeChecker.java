@@ -19,24 +19,73 @@ public class CorruptedEmployeeChecker {
     }
 
     public int countCorruptedFields(String[] splitEmpInfo) {
-        int corrputedCount = 0;
+        int corruptedCount = 0;
+        corruptedCount += checkCorruptedId(splitEmpInfo);
+        corruptedCount += checkCorruptedGender(splitEmpInfo);
+        corruptedCount += checkCorruptedSalary(splitEmpInfo);
+        corruptedCount += checkCorruptedEmail(splitEmpInfo);
+        corruptedCount += checkCorruptedDates(splitEmpInfo);
+        return corruptedCount;
+    }
 
-        //employee id should be max 8 digits
-        corrputedCount += checkCorruptedId(splitEmpInfo);
+    public int countCorruptedFields(Employee employee){
+        int corruptedFields = 0;
+        corruptedFields += checkCorruptedId(employee);
+        corruptedFields += checkCorruptedGender(employee);
+        corruptedFields += checkCorruptedSalary(employee);
+        corruptedFields += checkCorruptedEmail(employee);
+        corruptedFields += checkCorruptedDates(employee);
+        return corruptedFields;
+    }
 
-        //Gender should be M or F
-        corrputedCount += checkCorrputedGender(splitEmpInfo);
+    public int checkCorruptedDates(Employee employee) {
+        int corruptedDates = 0;
+        String dateRegex = "^\\d{2}/\\d{2}/\\d{4}$";
+        Pattern datePattern = Pattern.compile(dateRegex);
+        Matcher dobMatcher = datePattern.matcher(employee.getDateOfBirth());
+        Matcher dojMatcher = datePattern.matcher(employee.getDateOfJoining());
+        if(!dobMatcher.matches()){
+            corruptedDates++;
+        }
+        if(!dojMatcher.matches()){
+            corruptedDates++;
+        }
+        return corruptedDates;
+    }
 
-        //checks salary is positive
-        corrputedCount += checkCorruptedSalary(splitEmpInfo);
+    public int checkCorruptedEmail(Employee employee) {
+        int corruptedEmail = 0;
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+        Pattern pattern = Pattern.compile(emailRegex);
+        Matcher matcher = pattern.matcher(employee.getEmail());
+        if(!matcher.matches()){
+            corruptedEmail++;
+        }
+        return corruptedEmail;
+    }
 
-        //checks email
-        corrputedCount += checkCorruptedEmail(splitEmpInfo);
+    public int checkCorruptedSalary(Employee employee) {
+        int corruptedSalary = 0;
+        if(employee.getSalary() < 0){
+            corruptedSalary++;
+        }
+        return corruptedSalary;
+    }
 
-        //checks 2 dates
-        corrputedCount += checkCorruptedDates(splitEmpInfo);
+    public int checkCorruptedGender(Employee employee) {
+        int corruptedGender = 0;
+        if(!employee.getGender().equals("M") && !employee.getGender().equals("F")){
+            corruptedGender++;
+        }
+        return corruptedGender;
+    }
 
-        return corrputedCount;
+    public int checkCorruptedId(Employee employee) {
+        int corruptedId = 0;
+        if(employee.getEmpId().toString().length() > 8){
+            corruptedId++;
+        }
+        return corruptedId;
     }
 
     public int checkCorruptedSalary(String[] splitEmpInfo) {
@@ -49,14 +98,13 @@ public class CorruptedEmployeeChecker {
 
     public int checkCorruptedId(String[] splitEmpInfo) {
         int corruptedId = 0;
-
         if(splitEmpInfo[0].length() > 8) {
             corruptedId++;
         }
         return corruptedId;
     }
 
-    public int checkCorrputedGender(String[] splitEmpInfo) {
+    public int checkCorruptedGender(String[] splitEmpInfo) {
         int corruptedGender = 0;
         if(!splitEmpInfo[5].equals("M") && !splitEmpInfo[5].equals("F")) {
             corruptedGender++;
@@ -77,21 +125,18 @@ public class CorruptedEmployeeChecker {
     }
 
     public int checkCorruptedDates(String[] splitEmpInfo) {
-        int corrputedDates = 0;
-        //dob and doj should be in format YYYY-MM-DD
+        int corruptedDates = 0;
         String dateRegex = "^\\d{2}/\\d{2}/\\d{4}$";
         Pattern datePattern = Pattern.compile(dateRegex);
         Matcher dobMatcher = datePattern.matcher(splitEmpInfo[7]);
         Matcher dojMatcher = datePattern.matcher(splitEmpInfo[8]);
         if(!dobMatcher.matches()) {
-            corrputedDates++;
+            corruptedDates++;
         }
         if(!dojMatcher.matches()) {
-            corrputedDates++;
+            corruptedDates++;
         }
-        return corrputedDates;
+        return corruptedDates;
     }
-
-
 
 }
