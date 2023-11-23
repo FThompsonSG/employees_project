@@ -1,12 +1,17 @@
 package com.sparta.javajive.model;
 
+
+import java.util.logging.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 public class EmployeeStore {
+    private static final Logger logger = Logger.getLogger(EmployeeStore.class.getName());//pulls information from the class itself
+
     private static List<Employee> employeeStore = new ArrayList<>();
     private static Map<String, Integer> corruptedEmployees = new HashMap<>();
 
@@ -43,16 +48,20 @@ public class EmployeeStore {
             for (String employeeString: employeeStringArray) {
                 createEmployee(employeeString);
             }
+            FileHandler fileHandler = new FileHandler("src/main/resources/loggedEmployeeFile.log");
+            fileHandler.setLevel(Level.ALL);
+            fileHandler.setFormatter(new SimpleFormatter());
+            logger.setUseParentHandlers(false);
+            logger.addHandler(fileHandler);
+            for (String item : employeeStringArray) {
+                logger.info(item);
+            }
         } catch (IOException e) {
             System.out.println("An IOException has occurred: " + e.getMessage());
             e.printStackTrace();
         }
     }
 
-    public static void main(String[] args) {
-        initializeEmployeeStore(1000);
-        System.out.println(corruptedEmployees);
-    }
 
     public static void addEmployee(Employee employee) {
         employeeStore.add(employee);
