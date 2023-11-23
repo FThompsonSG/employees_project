@@ -28,9 +28,6 @@ public class EmployeeStore {
         return new Employee(Integer.parseInt(splitEmpInfo[0]),splitEmpInfo[1],splitEmpInfo[2], splitEmpInfo[3].charAt(0),splitEmpInfo[4],splitEmpInfo[5],splitEmpInfo[6],splitEmpInfo[7],splitEmpInfo[8],Integer.parseInt(splitEmpInfo[9]));
     }
 
-
-
-
     public static void setEmployeeArray(Employee employee){
         employeeStore.add(employee);
     }
