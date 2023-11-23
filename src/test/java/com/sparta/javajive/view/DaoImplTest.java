@@ -56,6 +56,10 @@ class DaoImplTest {
 
     @Test
     void getByAgeRangeTest() {
+        Employee employee = new Employee(777872, "Mr.", "Blaine", 'Q', "Cockrell", "M", "blaine.cockrell@gmail.com", "31/08/2005", "29/06/2016", 176446);
+        EmployeeStore.addEmployee(employee);
+        employees.add(employee);
+        Assertions.assertEquals(employees, daoImpl.getByAgeRange("18", "18"));
     }
 
 }
