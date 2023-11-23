@@ -7,27 +7,6 @@ import java.util.regex.Pattern;
 
 public class CorruptedEmployeeChecker {
 
-    private static Map<String, Integer> corruptedEmployees = new HashMap<>();
-
-
-    public static Map<String, Integer> getCorruptedEmployees() {
-        return corruptedEmployees;
-    }
-
-    public int getNumberOfCorruptedEmployees() {
-        return corruptedEmployees.size();
-    }
-
-    public int countCorruptedFields(String[] splitEmpInfo) {
-        int corruptedCount = 0;
-        corruptedCount += checkCorruptedId(splitEmpInfo);
-        corruptedCount += checkCorruptedGender(splitEmpInfo);
-        corruptedCount += checkCorruptedSalary(splitEmpInfo);
-        corruptedCount += checkCorruptedEmail(splitEmpInfo);
-        corruptedCount += checkCorruptedDates(splitEmpInfo);
-        return corruptedCount;
-    }
-
     public int countCorruptedFields(Employee employee){
         int corruptedFields = 0;
         corruptedFields += checkCorruptedId(employee);
@@ -86,57 +65,6 @@ public class CorruptedEmployeeChecker {
             corruptedId++;
         }
         return corruptedId;
-    }
-
-    public int checkCorruptedSalary(String[] splitEmpInfo) {
-        int corruptedSalary = 0;
-        if(Integer.parseInt(splitEmpInfo[9]) < 0) {
-            corruptedSalary++;
-        }
-        return corruptedSalary;
-    }
-
-    public int checkCorruptedId(String[] splitEmpInfo) {
-        int corruptedId = 0;
-        if(splitEmpInfo[0].length() > 8) {
-            corruptedId++;
-        }
-        return corruptedId;
-    }
-
-    public int checkCorruptedGender(String[] splitEmpInfo) {
-        int corruptedGender = 0;
-        if(!splitEmpInfo[5].equals("M") && !splitEmpInfo[5].equals("F")) {
-            corruptedGender++;
-        }
-        return corruptedGender;
-    }
-
-    public int checkCorruptedEmail(String[] splitEmpInfo) {
-        int emailCorrupted = 0;
-        //email should be in standard format
-        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
-        Pattern pattern = Pattern.compile(emailRegex);
-        Matcher matcher = pattern.matcher(splitEmpInfo[6]);
-        if(!matcher.matches()) {
-            emailCorrupted++;
-        }
-        return emailCorrupted;
-    }
-
-    public int checkCorruptedDates(String[] splitEmpInfo) {
-        int corruptedDates = 0;
-        String dateRegex = "^\\d{2}/\\d{2}/\\d{4}$";
-        Pattern datePattern = Pattern.compile(dateRegex);
-        Matcher dobMatcher = datePattern.matcher(splitEmpInfo[7]);
-        Matcher dojMatcher = datePattern.matcher(splitEmpInfo[8]);
-        if(!dobMatcher.matches()) {
-            corruptedDates++;
-        }
-        if(!dojMatcher.matches()) {
-            corruptedDates++;
-        }
-        return corruptedDates;
     }
 
 }
