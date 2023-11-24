@@ -37,14 +37,14 @@ public class UserInterface {
 
         int choice = 0;
 
-        while(choice != 4) {
+        while(choice!=5) {
             System.out.println(" ");
             System.out.println("Please pick a method that you would like to call to query these employees.");
             System.out.println(" ");
-            System.out.println("1. Search for an employee by using Employee ID.");
-            System.out.println("2. Search for an employee by using their Last Name.");
-            System.out.println("3. Search for an employee by giving a Date Range.");
-            System.out.println("4. Search for an employee by giving an Age Range.");
+            System.out.println("1. Search for an employee by Employee ID.");
+            System.out.println("2. Search for an employee by Last Name.");
+            System.out.println("3. Search for an employee by Start Date.");
+            System.out.println("4. Search for an employee by Age.");
             System.out.println("5. Exit");
 
             if(methodMenuChoice.hasNextInt()) {
