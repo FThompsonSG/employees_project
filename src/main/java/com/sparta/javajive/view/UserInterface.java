@@ -32,6 +32,7 @@ public class UserInterface {
     }
 
     public static void displayMethodChoices() {
+        UserInput userInput = new UserInput();
         Scanner methodMenuChoice = new Scanner(System.in);
 
         int choice = 0;
@@ -40,10 +41,11 @@ public class UserInterface {
             System.out.println(" ");
             System.out.println("Please pick a method that you would like to call to query these employees.");
             System.out.println(" ");
-            System.out.println("1. ");
-            System.out.println("2. ");
-            System.out.println("3. ");
-            System.out.println("4. Exit");
+            System.out.println("1. Search for an employee by using Employee ID.");
+            System.out.println("2. Search for an employee by using their Last Name.");
+            System.out.println("3. Search for an employee by giving a Date Range.");
+            System.out.println("4. Search for an employee by giving an Age Range.");
+            System.out.println("5. Exit");
 
             if(methodMenuChoice.hasNextInt()) {
                 choice = methodMenuChoice.nextInt();
@@ -51,10 +53,11 @@ public class UserInterface {
 
                 //method calls for controller methods
                 switch(choice) {
-                    case 1 -> System.out.println("1 was selected");
-                    case 2 -> System.out.println("2 was selected");
-                    case 3 -> System.out.println("3 was selected");
-                    case 4 -> System.out.println("Exit was selected");
+                    case 1 -> userInput.empIDScanner();
+                    case 2 -> userInput.lastNameScanner();
+                    case 3 -> userInput.dateRangeScanner();
+                    case 4 -> userInput.ageRangeScanner();
+                    case 5 -> System.exit(0);
                     default -> System.out.println("Invalid choice of method");
                 }
             } else {
