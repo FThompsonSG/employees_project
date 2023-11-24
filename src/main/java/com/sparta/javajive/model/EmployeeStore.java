@@ -79,6 +79,7 @@ public class EmployeeStore {
             employeeFileLogger.info(item);
         }
     }
+  
     private static void logCorruptedEmployees(String employeeStringArray) throws IOException {
         FileHandler corruptedEmployeeFileHandler = new FileHandler("src/main/resources/corruptedEmployeeStore.log");
         corruptedEmployeeFileHandler.setLevel(Level.ALL);
@@ -88,9 +89,6 @@ public class EmployeeStore {
         corruptedEmployeeFileLogger.info("ClientID, Name Prefix, FirstName, MidInitial, LastName, Gender, Email, DoB, DoJ, Salary");
         corruptedEmployeeFileLogger.info(employeeStringArray);
     }
-
-
-
     public static void addEmployee(Employee employee) {
         employeeStore.add(employee);
     }
