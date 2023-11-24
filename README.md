@@ -1,57 +1,25 @@
-# MySQL Employees Projects Week 3 - SOLID/OOP
+# Employee Data Manipulation Project
+Uses a CSV file full of employee records including fields such as employee ID number, date of birth and name. The application uses this CSV file to parse the data and display requested information to the user such as getting an employee by their ID or searching for employees by their last name.
+This group project was assigned to us as part of our Java development training to allow us to demonstrate our collaborative git skills and Java development skills.
+The main aims of the project include:
+-	Parsing a csv file into an appropriate data structure.
+-	Implementing the DAO and DTO design patterns.
+-	Using the MVC (Model, View, Controller) design pattern.
+-	Create a user interface and searching functionality.
 
-## General Requirements
+## Project Structure
+The project was divided into multiple packages based on the MVC design pattern.
+ The model package contains all classes and methods pertaining to the data set and manipulating it into a more accessible format, this is where the DTO pattern was implemented under the file name EmployeeStore.java.
+The controller package contains the logic to query the DTO and return the appropriate information regarding the employee records. This package contains the implementation of the DAO design pattern.
+The view package contains the user interface and calls the DAO methods. Any time information is printed, this logic should be handled in the view package.
 
-All projects:
+## Project Workflow 
+This project was run as a SCRUM project, with daily standups and code reviews. This made the collaboration aspect of the project much simpler as all members were on the same page when going into coding sessions throughout the day. Using scrum methodology also made the delegation of work much easier as the use of user stories allowed the challenge to be broken down into much smaller, digestible chunks that could be worked on during the sprints. Pair programming was also used throughout the project to allow for cleaner code and collaborative problem solving.
 
-- Must be run as Scrum projects
-- Should be groups 
-- Must apply SOLID & OO principles
-- Must use the MVC pattern where there is a user interface
-- Should use well-known design patterns where appropriate
-- Must include comprehensive `JUnit` testing or equivalent
-- Should begin with the creation of tests, in line with a test-driven development approach
-- Must implement appropriate exception handling
-- Must be hosted on GitHub and thoroughly documented, through a README.md file
+## Test-Driven Development
+Test-driven development involves writing extensive unit tests for the application before writing any of the code. This methodology helps with assuring that code achieves its desired functionality and does not get broken with future alterations.
+Our testing was quite extensive, however, using Junit tests sometimes became quite difficult and manual testing through print statements and log files was a more efficient way to go about this problem.
 
-## Purpose
+## Running the code
+The code includes an App.java file in the view package which is the main launch point for the application, run this file and the rest of the application should follow.
 
-In addition to the general goals of projects, this project will give trainees an opportunity to:
-
-- Parse data into a suitable data structure
-- Use the `Collections` framework
-- Develop a collection class from scratch
-- Implement the DAO and DTO design patterns
-- Provide a user interface and searching capability
-- Using interfaces
-
-## Requirements
-
-- *Add the provided factory class, `EmployeeFactory.java`, to a suitable package within your project*
-- *Add the provided sample data file, `employees.csv`, to the `src/main/resources` folder in your project*
-- Call `EmployeeFactory.getEmployees(n)` to generate an array of random employee data of size `n` (`1 <= n <= 1000`)
-- Employee data is provided as an array of `String`s, returned from `getEmployees()`, each `String` representing
-  
-  - `Emp ID`(up to 8 digits)
-  - `Prefix` 
-  - `First Name` 
-  - `Middle Initial`  
-  - `Last Name`
-  - `Gender` (stored as M or F)
-  - `E Mail` (in standard email format)
-  - `Date of Birth` (`YYYY-MM-DD` calendar date format)
-  - `Date of Joining` (`YYYY-MM-DD` calendar date format)  
-  - `Salary` 
-- The values for the employee data will be separated by commas within the `String`
-  - For example, `"387647,Drs.,Shanika,D,Tejada,F,shanika.tejada@gmail.com,8/16/1958,5/23/1995,81253"`
-- Convert each element in the array into an `Employee` object, having created a suitable DTO class, and store it in a `List` using a suitable concrete type
-- There is a risk that some of the data entries are corrupted. You will need to sanitise the data and ensure that only correct and complete records are added to the list. You should also inform the user of how many employee records are corrupted
-- You will next need to create a DAO class to interact with the collection of employees. This class will need to provide apis for the following:
-  - Search for employee by `Emp ID`
-  - Search for employees by `Last Name` (partial match)
-  - Search for employees hired within a date range
-  - Search for employees by age range
-- This class should be designed using an interface before being implemented. You are free to add more methods which you think will be useful
-- Think about exceptions you will throw to indicate that an error has occurred
-- Since you are working with a collection type, functional programming could be used 
-- Next, you will need to use JUnit to fully test your DAO class. Think about all the cases that need to be tested along with testing that exceptions have been thrown.  
