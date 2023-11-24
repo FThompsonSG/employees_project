@@ -85,7 +85,6 @@ public class DaoImpl implements Dao {
             if (yearsOld >= minimumAge && yearsOld <= maximumAge) {
                 result.add(employee);
             }
-
         }
         return result;
     }
