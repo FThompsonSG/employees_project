@@ -29,9 +29,8 @@ public class DaoImpl implements Dao {
                 }
             }
         } catch (RuntimeException e) {
-            System.out.println("Employee Not Found.");
+            System.err.println("Employee Not Found.");
         }
-        System.out.println("Employee Not Found.");
         return null;
     }
 
@@ -42,9 +41,6 @@ public class DaoImpl implements Dao {
             if (employee.getLastName().equals(lastName)) {
                 result.add(employee);
             }
-        }
-        if (result.size() == 0) {
-            System.err.println("No employees found matching criteria");
         }
         return result;
     }
@@ -64,7 +60,7 @@ public class DaoImpl implements Dao {
                     result.add(employee);
                 }
             } catch (DateTimeParseException e) {
-                System.out.println("Error parsing date for: " + employee.getLastName());
+                System.err.println("Error parsing date for: " + employee.getLastName());
             }
         }
         return result;
@@ -78,12 +74,16 @@ public class DaoImpl implements Dao {
         Integer maximumAge = Integer.parseInt(maxAge);
 
         for (Employee employee : EmployeeStore.getEmployeeStore()) {
-            LocalDate dateOfBirth = LocalDate.parse(employee.getDateOfBirth(), formatter);
-            LocalDate currentDate = LocalDate.now();
-            Period period = Period.between(dateOfBirth, currentDate);
-            int yearsOld = period.getYears();
-            if (yearsOld >= minimumAge && yearsOld <= maximumAge) {
-                result.add(employee);
+            try {
+                LocalDate dateOfBirth = LocalDate.parse(employee.getDateOfBirth(), formatter);
+                LocalDate currentDate = LocalDate.now();
+                Period period = Period.between(dateOfBirth, currentDate);
+                int yearsOld = period.getYears();
+                if (yearsOld >= minimumAge && yearsOld <= maximumAge) {
+                    result.add(employee);
+                }
+            } catch (DateTimeParseException e) {
+                System.err.println("Error parsing date for: " + employee.getLastName());
             }
 
         }
