@@ -28,18 +28,24 @@ public class Employee {
 
     @Override
     public String toString() {
-        return "Employee{" +
-                "empId=" + empId +
-                ", namePrefix='" + namePrefix + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", midInit=" + midInit +
-                ", lastName='" + lastName + '\'' +
-                ", gender='" + gender + '\'' +
-                ", email='" + email + '\'' +
-                ", dateOfBirth='" + dateOfBirth + '\'' +
-                ", dateOfJoining='" + dateOfJoining + '\'' +
-                ", salary=" + salary +
-                '}';
+        StringBuilder employeeStringBuilder = new StringBuilder();
+        employeeStringBuilder.append("EmpID: ").append(empId);
+        employeeStringBuilder.append("\n");
+        String employeeName = "Employee name: " + " " + namePrefix + " " + firstName + " " + midInit + " " + lastName;
+        employeeStringBuilder.append(employeeName);
+        employeeStringBuilder.append("\n");
+        employeeStringBuilder.append("Gender: ").append(gender);
+        employeeStringBuilder.append("\n");
+        employeeStringBuilder.append("Email address: ").append(email);
+        employeeStringBuilder.append("\n");
+        employeeStringBuilder.append("Date of Birth: ").append(dateOfBirth);
+        employeeStringBuilder.append("\n");
+        employeeStringBuilder.append("Date of Joining: ").append(dateOfJoining);
+        employeeStringBuilder.append("\n");
+        employeeStringBuilder.append("Salary: ").append("$").append(salary);
+        employeeStringBuilder.append("\n");
+        return employeeStringBuilder.toString();
+
     }
 
     public Integer getEmpId() {
