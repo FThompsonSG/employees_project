@@ -47,8 +47,11 @@ public class UserInterface {
             System.out.println("4. Search for an employee by Age.");
             System.out.println("5. Exit");
 
+
             if(methodMenuChoice.hasNextInt()) {
+
                 choice = methodMenuChoice.nextInt();
+
                 methodMenuChoice.nextLine(); //eat the new line character
 
                 //method calls for controller methods
