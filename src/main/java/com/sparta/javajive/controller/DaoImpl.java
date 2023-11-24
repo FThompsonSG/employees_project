@@ -78,6 +78,13 @@ public class DaoImpl implements Dao {
         Integer maximumAge = Integer.parseInt(maxAge);
 
         for (Employee employee : EmployeeStore.getEmployeeStore()) {
+            LocalDate dateOfBirth = LocalDate.parse(employee.getDateOfBirth(), formatter);
+            LocalDate currentDate = LocalDate.now();
+            Period period = Period.between(dateOfBirth, currentDate);
+            int yearsOld = period.getYears();
+            if (yearsOld >= minimumAge && yearsOld <= maximumAge) {
+                result.add(employee);
+            }
             try {
                 LocalDate dateOfBirth = LocalDate.parse(employee.getDateOfBirth(), formatter);
                 LocalDate currentDate = LocalDate.now();
