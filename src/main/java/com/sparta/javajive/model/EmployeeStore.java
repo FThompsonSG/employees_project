@@ -66,8 +66,7 @@ public class EmployeeStore {
             logger.info(item);
         }
     }
-
-
+    
     public static void addEmployee(Employee employee) {
         employeeStore.add(employee);
     }
