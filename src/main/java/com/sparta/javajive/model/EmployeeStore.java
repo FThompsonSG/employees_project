@@ -48,21 +48,25 @@ public class EmployeeStore {
             for (String employeeString: employeeStringArray) {
                 createEmployee(employeeString);
             }
-            FileHandler fileHandler = new FileHandler("src/main/resources/loggedEmployeeFile.log");
-            fileHandler.setLevel(Level.ALL);
-            fileHandler.setFormatter(new SimpleFormatter());
-            logger.setUseParentHandlers(false);
-            logger.addHandler(fileHandler);
-            for (String item : employeeStringArray) {
-                logger.info(item);
-            }
+            logEmployees(employeeStringArray);
         } catch (IOException e) {
             System.out.println("An IOException has occurred: " + e.getMessage());
             e.printStackTrace();
         }
     }
 
-
+    private static void logEmployees(String[] employeeStringArray) throws IOException {
+        FileHandler fileHandler = new FileHandler("src/main/resources/loggedEmployeeFile.log");
+        fileHandler.setLevel(Level.ALL);
+        fileHandler.setFormatter(new SimpleMessageFormatter());
+        logger.setUseParentHandlers(false);
+        logger.addHandler(fileHandler);
+        logger.info("ClientID, Name Prefix, FirstName, MidInitial, LastName, Gender, Email, DoB, DoJ, Salary");
+        for (String item : employeeStringArray) {
+            logger.info(item);
+        }
+    }
+    
     public static void addEmployee(Employee employee) {
         employeeStore.add(employee);
     }
