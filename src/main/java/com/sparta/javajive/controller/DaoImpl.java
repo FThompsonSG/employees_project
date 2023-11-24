@@ -31,7 +31,6 @@ public class DaoImpl implements Dao {
         } catch (RuntimeException e) {
             System.err.println("Employee Not Found.");
         }
-        System.out.println("Employee Not Found.");
         return null;
     }
 
@@ -42,9 +41,6 @@ public class DaoImpl implements Dao {
             if (employee.getLastName().equals(lastName)) {
                 result.add(employee);
             }
-        }
-        if (result.size() == 0) {
-            System.err.println("No employees found matching criteria");
         }
         return result;
     }
