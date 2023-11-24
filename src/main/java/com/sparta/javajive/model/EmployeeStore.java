@@ -43,7 +43,6 @@ public class EmployeeStore {
         employeeStore.add(employee);
     }
 
-
     public static void initializeEmployeeStore(int howMany) {
         try {
             employeeStore.clear();
