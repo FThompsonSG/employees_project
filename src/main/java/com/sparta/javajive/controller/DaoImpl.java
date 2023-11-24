@@ -2,6 +2,7 @@ package com.sparta.javajive.controller;
 
 import com.sparta.javajive.model.Employee;
 import com.sparta.javajive.model.EmployeeStore;
+import com.sparta.javajive.view.PrintArrayList;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -21,7 +22,7 @@ public class DaoImpl implements Dao {
 
     @Override
     public Employee getById(int empId) {
-        try{
+        try {
             for (Employee employee : EmployeeStore.getEmployeeStore()) {
                 if (employee.getEmpId().equals(empId)) {
                     return employee;
@@ -38,8 +39,6 @@ public class DaoImpl implements Dao {
     public ArrayList<Employee> getByLastName(String lastName) {
         ArrayList<Employee> result = new ArrayList<>();
         for (Employee employee : EmployeeStore.getEmployeeStore()) {
-            System.out.println(employee.toString());
-            System.out.println(employee.getLastName());
             if (employee.getLastName().equals(lastName)) {
                 result.add(employee);
             }
@@ -58,16 +57,17 @@ public class DaoImpl implements Dao {
         LocalDate endDate = LocalDate.parse(maxRange, formatter);
 
 
-            for (Employee employee : EmployeeStore.getEmployeeStore()) {
-                try {
-                    LocalDate dateOfJoining = LocalDate.parse(employee.getDateOfJoining(), formatter);
-                    if (!dateOfJoining.isBefore(startDate) && !dateOfJoining.isAfter(endDate)) {
-                        result.add(employee);
-                    }
-                } catch (DateTimeParseException e) {
-                    System.out.println("Error parsing date for: " + employee.getLastName());
+        for (Employee employee : EmployeeStore.getEmployeeStore()) {
+            try {
+                LocalDate dateOfJoining = LocalDate.parse(employee.getDateOfJoining(), formatter);
+                if (!dateOfJoining.isBefore(startDate) && !dateOfJoining.isAfter(endDate)) {
+                    result.add(employee);
                 }
-            } return result;
+            } catch (DateTimeParseException e) {
+                System.out.println("Error parsing date for: " + employee.getLastName());
+            }
+        }
+        return result;
     }
 
     @Override
