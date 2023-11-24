@@ -5,6 +5,7 @@ import com.sparta.javajive.model.Employee;
 import com.sparta.javajive.model.EmployeeStore;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -13,11 +14,15 @@ public class UserInput {
 
     DaoImpl daoImpl = new DaoImpl(EmployeeStore.getEmployeeStore());
 
-    public void empIDScanner() {
-        Scanner empIdScanner = new Scanner(System.in);
-        System.out.println("Please enter the employee ID: ");
-        int empIdInput = empIdScanner.nextInt();
-        System.out.println(daoImpl.getById(empIdInput));
+    public void empIDScanner() throws InputMismatchException {
+        try {
+            Scanner empIdScanner = new Scanner(System.in);
+            System.out.println("Please enter the employee ID: ");
+            int empIdInput = empIdScanner.nextInt();
+            System.out.println(daoImpl.getById(empIdInput));
+        }catch (InputMismatchException e){
+            System.err.println("Invalid Input.");
+        }
     }
 
     public void lastNameScanner() {
