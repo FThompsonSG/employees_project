@@ -14,14 +14,22 @@ public class UserInput {
 
     DaoImpl daoImpl = new DaoImpl(EmployeeStore.getEmployeeStore());
 
-    public void empIDScanner() throws InputMismatchException {
+    public void empIDScanner() throws InputMismatchException{
         try {
             Scanner empIdScanner = new Scanner(System.in);
             System.out.println("Please enter the employee ID: ");
-            int empIdInput = empIdScanner.nextInt();
-            System.out.println(daoImpl.getById(empIdInput));
+            Integer empIdInput = empIdScanner.nextInt();
+            String empIdSize = empIdInput.toString();
+
+            if(empIdSize.length() < 1 || empIdSize.length()>8) {
+                System.out.println("Invalid Input - Input must be between 0-8 Digits");
+            }else if(daoImpl.getById(empIdInput)== null){
+                System.out.println("Employee Not Found.");
+            }else{
+                System.out.println(daoImpl.getById(empIdInput));
+            }
         }catch (InputMismatchException e){
-            System.err.println("Invalid Input.");
+            System.err.println("---------------Invalid Input!--------------- \nPlease Enter Employee ID as a Numeric Value" );
         }
     }
 
