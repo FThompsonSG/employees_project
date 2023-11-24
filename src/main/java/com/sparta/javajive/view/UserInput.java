@@ -18,7 +18,6 @@ public class UserInput {
         System.out.println("Please enter the employee ID: ");
         int empIdInput = empIdScanner.nextInt();
         System.out.println(daoImpl.getById(empIdInput));
-        empIdScanner.close();
     }
 
     public void lastNameScanner() {
@@ -26,7 +25,6 @@ public class UserInput {
         System.out.println("Please enter the Last Name");
         String lastNameInput = lastNameScanner.nextLine();
         System.out.println(daoImpl.getByLastName(lastNameInput));
-        lastNameScanner.close();
     }
 
     public void dateRangeScanner() {
@@ -36,7 +34,6 @@ public class UserInput {
         System.out.println("Please enter the second date in date range: (dd/MM/YYYY)");
         String dateRangeLastInput = dateRangeScanner.nextLine();
         PrintArrayList.printArrayList(daoImpl.getByDateRange(dateRangeFirstInput, dateRangeLastInput));
-        dateRangeScanner.close();
     }
 
     public void ageRangeScanner() {
@@ -46,7 +43,6 @@ public class UserInput {
         System.out.println("Please enter the second age in age range: ");
         String ageRangeLastInput = ageRangeScanner.nextLine();
         PrintArrayList.printArrayList(daoImpl.getByAgeRange(ageRangeFirstInput, ageRangeLastInput));
-        ageRangeScanner.close();
     }
 
 }
